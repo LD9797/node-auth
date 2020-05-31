@@ -1,4 +1,6 @@
 import { Schema, model, Document } from 'mongoose'
+import { hash } from 'bcryptjs'
+import {BCRYPT_WORK_FACTOR} from "../config";
 
 // Only for ts
 interface UserDocument extends Document {
@@ -13,6 +15,12 @@ const userSchema = new Schema({
     password: String
 }, {
     timestamps: true
+})
+
+userSchema.pre<UserDocument>('save', async function (){
+    if(this.isModified('password')) {
+        this.password = await hash(this.password, BCRYPT_WORK_FACTOR)
+    }
 })
 
 // <> Only for ts
