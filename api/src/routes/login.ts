@@ -9,8 +9,9 @@ const router = Router()
 
 router.post('/login', guest, catchAsync (async (req, res) => {
     await validate(loginSchema, req.body)
+    // @ts-ignore
+    // req.sessionStore!.client.del('sess:2WmqdAFpajJz08OOspCnD8ANPWgAH3UC')
     const { email, password } = req.body
-
     const user = await User.findOne({ email })
     if (!user || !(await user.matchesPassword(password))){
         throw new Unauthorized('Incorrect email or password')
