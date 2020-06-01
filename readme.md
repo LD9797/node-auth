@@ -18,4 +18,5 @@ curl -v -X POST localhost:3000/login -H 'Content-Type: application/json' -d '{"e
 
 sudo docker exec -it nodeauth_db_1 mongo -u admin -p secret auth
 sudo docker exec -it nodeauth_cache_1 redis-cli -a secret
+sudo docker exec -it nodeauth_cache_1 redis-cli -a secret flushall
 
