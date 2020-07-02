@@ -1,0 +1,55 @@
+{
+  "name": "back-manager",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "lint": "eslint '**/*.{js,ts,tsx,json}'",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,js,tsx,json}": [
+      "npm run lint:fix"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LD9797/back-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LD9797/back-manager/issues"
+  },
+  "author": "lhidalgo",
+  "license": "",
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.6",
+    "@types/express-session": "^1.17.0",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^14.0.14",
+    "@typescript-eslint/eslint-plugin": "^3.5.0",
+    "@typescript-eslint/parser": "^3.5.0",
+    "eslint": "^7.3.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.15.1",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "graphql": "^15.2.0"
+  }
+}
