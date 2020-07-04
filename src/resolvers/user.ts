@@ -1,14 +1,12 @@
 import { IResolvers } from 'apollo-server-express'
+import { user } from '../entity'
+import { getRepository } from 'typeorm'
 
 const resolvers: IResolvers = {
   Query: {
-    me: (_, __, ___, ____) => {
-      return {
-        id: 1,
-        name: 'name',
-        createdAt: 'Created',
-        updatedAt: 'updated',
-      }
+    me: async (_, __, ___, ____) => {
+      const userRepository = getRepository(user)
+      return await userRepository.find({ select: ['id', 'name'] })
     },
   },
 }

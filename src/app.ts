@@ -1,11 +1,20 @@
+import 'reflect-metadata'
 import express from 'express'
+import session from 'express-session'
 import { ApolloServer } from 'apollo-server-express'
-import { APOLLO_OPTIONS } from './config'
+import { APOLLO_OPTIONS, SESS_OPTIONS } from './config'
 import typeDefs from './typeDefs'
 import resolvers from './resolvers'
+import { createConnection } from 'typeorm'
 
-const createApp = () => {
+const createApp = async (store?: session.Store) => {
+  await createConnection().then(() => console.log('Connected to MySQL'))
   const app = express()
+  const sessionHandler = session({
+    store,
+    ...SESS_OPTIONS,
+  })
+  app.use(sessionHandler)
   const server = new ApolloServer({
     ...APOLLO_OPTIONS,
     typeDefs,
