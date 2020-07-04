@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 const ONE_DAY = 1000 * 60 * 60 * 24
 
 export const {
@@ -42,4 +45,10 @@ export const SESS_OPTIONS = {
     sameSite: true,
     secure: IN_PROD,
   },
+}
+
+export const ORM_OPTIONS = {
+  DB_USERNAME: process.env.DB_USERNAME,
+  DB_PASSWORD: process.env.DB_PASSWORD,
+  DB_DATABASE_NAME: process.env.DB_DATABASE_NAME,
 }

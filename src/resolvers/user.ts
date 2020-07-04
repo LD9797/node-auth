@@ -6,7 +6,7 @@ const resolvers: IResolvers = {
   Query: {
     me: async (_, __, ___, ____) => {
       const userRepository = getRepository(user)
-      return await userRepository.find({ select: ['id', 'name'] })
+      return await userRepository.find()
     },
   },
 }

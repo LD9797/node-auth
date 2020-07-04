@@ -8,6 +8,7 @@ export default gql`
   type User {
     id: ID!
     name: String!
+    email: String!
     first_last_name: String!
     second_last_name: String!
     created_at: String!
