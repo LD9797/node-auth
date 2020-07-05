@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  UpdateDateColumn,
+  CreateDateColumn,
+} from 'typeorm'
 
 export enum CurrentTimeStamp {
   CURRENT_TIMESTAMP = 'CURRENT_TIMESTAMP',
@@ -15,7 +22,7 @@ export class user extends BaseEntity {
   @Column('text')
   first_last_name: string | undefined
 
-  @Column('text')
+  @Column({ type: 'text', nullable: true })
   second_last_name: string | undefined
 
   @Column('text') // TODO: email validation
@@ -24,15 +31,13 @@ export class user extends BaseEntity {
   @Column('text')
   password: string | undefined
 
-  @Column({
-    type: 'timestamp',
-    default: () => CurrentTimeStamp.CURRENT_TIMESTAMP,
+  @CreateDateColumn({
+    name: 'created_at',
   })
   created_at: Date | undefined
 
-  @Column({
-    type: 'timestamp',
-    default: () => CurrentTimeStamp.CURRENT_TIMESTAMP,
+  @UpdateDateColumn({
+    name: 'updated_at',
   })
   updated_at: Date | undefined
 }

@@ -4,16 +4,16 @@ dotenv.config()
 const ONE_DAY = 1000 * 60 * 60 * 24
 
 export const {
-  NODE_ENV = 'development',
-  HTTP_PORT = 3000,
+  NODE_ENV = process.env.NODE_ENV,
+  HTTP_PORT = process.env.HTTP_PORT,
 
-  SESS_NAME = 'sid',
-  SESS_SECRET = 'ssh!secret!',
+  SESS_NAME = process.env.SESS_NAME,
+  SESS_SECRET = process.env.SESS_SECRET as string,
   SESS_LIFETIME = ONE_DAY,
 
-  REDIS_HOST = 'redis-16891.c56.east-us.azure.cloud.redislabs.com',
-  REDIS_PORT = 16891,
-  REDIS_PASSWORD = 'uVzgjERtOLZNHPiRQgA2nosRgnE6WjZw',
+  REDIS_HOST = process.env.REDIS_HOST,
+  REDIS_PORT = !process.env.REDIS_PORT,
+  REDIS_PASSWORD = process.env.REDIS_PASSWORD,
 } = process.env
 
 export const IN_PROD = NODE_ENV === 'production'
