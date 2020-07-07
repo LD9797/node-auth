@@ -65,6 +65,7 @@
     "graphql-passport": "^0.6.3",
     "ioredis": "^4.17.3",
     "mysql2": "^2.1.0",
+    "passport": "^0.4.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25"
   }

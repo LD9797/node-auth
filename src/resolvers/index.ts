@@ -1,3 +1,4 @@
 import user from './user'
+import authPayload from './authPayload'
 
-export default [user]
+export default [user, authPayload]
