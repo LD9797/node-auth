@@ -8,37 +8,23 @@ import resolvers from './resolvers'
 import { createConnection } from 'typeorm'
 import passport from 'passport'
 import { GraphQLLocalStrategy, buildContext } from 'graphql-passport'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { user } from './entity'
-import { getRepository } from 'typeorm'
-import * as bcrypt from 'bcryptjs'
+import { attemptSignIn } from './auth'
 
 const createApp = async (store?: session.Store) => {
   await createConnection().then(() => console.log('Connected to MySQL'))
 
   passport.use(
-    new GraphQLLocalStrategy(
-      async (
-        email: any,
-        password: any,
-        done: (arg0: undefined | Error, arg1: any) => void
-      ) => {
-        let found = true
-        const repository = getRepository(user)
-        const matchingUser = await repository.findOne({
-          email: email,
-        })
-        if (matchingUser) {
-          if (matchingUser.password != null) {
-            const valid = await bcrypt.compare(password, matchingUser.password)
-            if (!valid) {
-              found = false
-            }
-          }
-        }
-        const error = found ? undefined : new Error('No matching user')
-        done(error, matchingUser)
+    new GraphQLLocalStrategy(async (email: any, password: any, done: any) => {
+      // TODO: Implement one session per user filter
+      try {
+        const matchingUser = await attemptSignIn({ email, password })
+        done(null, matchingUser)
+      } catch (error) {
+        done(error, null)
       }
-    )
+    })
   )
 
   // used to serialize the user for the session

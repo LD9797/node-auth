@@ -17,6 +17,6 @@ import session from 'express-session'
       console.log(`ws://localhost:${HTTP_PORT}${server.subscriptionsPath}`)
     })
   } catch (e) {
-    console.log(e)
+    console.error(e)
   }
 })()
