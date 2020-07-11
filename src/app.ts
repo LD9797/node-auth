@@ -11,6 +11,7 @@ import { GraphQLLocalStrategy, buildContext } from 'graphql-passport'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { user } from './entity'
 import { attemptSignIn } from './auth'
+import schemaDirectives from './directives'
 
 const createApp = async (store?: session.Store) => {
   await createConnection().then(() => console.log('Connected to MySQL'))
@@ -49,7 +50,9 @@ const createApp = async (store?: session.Store) => {
     ...APOLLO_OPTIONS,
     typeDefs,
     resolvers,
+    schemaDirectives,
     context: ({ req, res }) => buildContext({ req, res }),
+    debug: false,
   })
   server.applyMiddleware({ app, cors: false })
   return { app, server }

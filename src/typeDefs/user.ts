@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
   extend type Query {
-    users: [User]
+    users: [User] @auth
   }
 
   extend type Mutation {
@@ -12,7 +12,7 @@ export default gql`
       second_last_name: String
       email: String!
       password: String!
-    ): User
+    ): User @guest
   }
 
   type User {
