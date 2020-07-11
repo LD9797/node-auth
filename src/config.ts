@@ -7,7 +7,7 @@ export const {
   NODE_ENV = process.env.NODE_ENV,
   HTTP_PORT = process.env.HTTP_PORT,
 
-  SESS_NAME = process.env.SESS_NAME,
+  SESS_NAME = process.env.SESS_NAME as string,
   SESS_SECRET = process.env.SESS_SECRET as string,
   SESS_LIFETIME = ONE_DAY,
 

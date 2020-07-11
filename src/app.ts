@@ -41,19 +41,29 @@ const createApp = async (store?: session.Store) => {
     )
   )
 
+  // used to serialize the user for the session
+  passport.serializeUser((user: user, done) => {
+    done(null, user.id)
+  })
+
+  // used to deserialize the user
+  passport.deserializeUser((user, done) => {
+    done(null, user)
+  })
+
   const app = express()
-  app.use(passport.initialize())
   const sessionHandler = session({
     store,
     ...SESS_OPTIONS,
   })
   app.use(sessionHandler)
+  app.use(passport.initialize())
+  app.use(passport.session())
   const server = new ApolloServer({
     ...APOLLO_OPTIONS,
     typeDefs,
     resolvers,
-    context: ({ req, res, connection }) =>
-      connection ? connection.context : buildContext({ req, res }),
+    context: ({ req, res }) => buildContext({ req, res }),
   })
   server.applyMiddleware({ app, cors: false })
   return { app, server }

@@ -7,5 +7,6 @@ export default gql`
 
   extend type Mutation {
     login(email: String!, password: String!): AuthPayload
+    logout(email: String!): AuthPayload
   }
 `

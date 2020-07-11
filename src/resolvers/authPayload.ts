@@ -1,4 +1,5 @@
 import { IResolvers } from 'apollo-server-express'
+import { signOut } from '../auth'
 
 const resolvers: IResolvers = {
   Mutation: {
@@ -9,6 +10,12 @@ const resolvers: IResolvers = {
       })
       await context.login(user)
       return { user }
+    },
+    logout: async (_, __, context) => {
+      const isSignedOut = await signOut(context.req, context.res)
+      if (isSignedOut) {
+        await context.logout()
+      }
     },
   },
 }
