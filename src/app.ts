@@ -19,6 +19,7 @@ const createApp = async (store?: session.Store) => {
   passport.use(
     new GraphQLLocalStrategy(async (email: any, password: any, done: any) => {
       // TODO: Implement one session per user filter
+      // This is just a test
       try {
         const matchingUser = await attemptSignIn({ email, password })
         done(null, matchingUser)
