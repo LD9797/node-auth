@@ -20,6 +20,7 @@ const createApp = async (store?: session.Store) => {
     new GraphQLLocalStrategy(async (email: any, password: any, done: any) => {
       // TODO: Implement one session per user filter
       // This is just a test
+      // This is another test
       try {
         const matchingUser = await attemptSignIn({ email, password })
         done(null, matchingUser)
