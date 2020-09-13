@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "lint": "eslint '**/*.{js,ts,tsx,json}'",
+    "lint": "eslint '**/*.{js,ts,tsx,json}' --no-error-on-unmatched-pattern",
     "lint:fix": "npm run lint -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc -p tsconfig.prod.json",
